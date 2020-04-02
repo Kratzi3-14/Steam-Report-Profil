@@ -1,44 +1,17 @@
 <#
-Add-Type -AssemblyName PresentationCore,PresentationFramework
-$ButtonType = [System.Windows.MessageBoxButton]::Ok
-$MessageBody = ""
-$MessageTitle = "Confirm Deletion"
-
-if($result -eq 0){
-
-$MessageIcon = [System.Windows.MessageBoxImage]::Warning
-
-}
-else{
-$MessageIcon = [System.Windows.MessageBoxImage]::Information
-
-} 
-
-[System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
-
+.Synopsis
+   cript pour obtenir URL Steam et le stock
+.DESCRIPTION
+   Change a alias profil to the source URL profil and save in file with important information user.
+   Version : 1.2
+   Created by Kratzi 
+   Email: none
+   Web: none
+.EXAMPLE
+   Get-steamid 
 #>
-
 <#
-
-Descript : Change a alias profil to the source URL profil and save in file with important information user.
-
-Autor : Kratzi
-
-Version 1.2
-
-if($buttonOK_OnClick
-$buttonOK_OnClick = Get-steamID $textBox.Text
-
-
-
-Executable :
-        Champ dialogue pour URL
-        Bouton :
-                - Soumettre
-                - Actualiser le fichier
-                - Cancel
-    
-   All in SteamReported :
+  All in SteamReported :
          - Banned : (if is ban)
                 - Reported Name
                 - Actualy Name
@@ -49,15 +22,7 @@ Executable :
                 - Reported Name
                 - Actualy Name
                 - URL : http://steamcommunity.com/profiles/$result
-                - Report Date : 
-
-
-Function Show-Popup 
-{ 
-   $WshShell = New-Object -ComObject wscript.Shell 
-   $WshShell.Popup($args[0], 0, ’Popup PowerShell’) 
-}
-
+                - Report Date :
 #>
 
 
