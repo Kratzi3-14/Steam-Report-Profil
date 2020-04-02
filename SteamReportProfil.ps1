@@ -48,9 +48,9 @@ function Get-steamID {
     Process
     {
         # Fichier dans lequel sera répertorier toute les URL signalé
-        $FileProfilReport = "C:\Users\SierraLima\OneDrive\# Perso\# Principal\VIRTUAL\Reported List.txt"
+        $FileProfilReport = "Path\Reported List.txt"
         # Clé API Steam permettant d'avoir accès au information
-        $APISteamKey = "941840D78A3B400C3198386DAC150823"
+        $APISteamKey = "Your API Steam KEY" #Found your API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite)
         # Remplace 
         $searchURL = $url.Replace(' ','%20')
         # Récupère le code source de la page
