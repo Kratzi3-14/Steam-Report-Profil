@@ -135,7 +135,7 @@ $URL                             = New-Object system.Windows.Forms.TextBox
 $URL.multiline                   = $false
 $URL.width                       = 358
 $URL.height                      = 20
-$URL.location                    = New-Object System.Drawing.Point(20,38)
+$URL.location                    = New-Object System.Drawing.Point(20,34)
 $URL.Font                        = 'Microsoft Sans Serif,10'
 
 $AddButtom                             = New-Object system.Windows.Forms.Button
@@ -143,18 +143,18 @@ $AddButtom.text                        = "Add"
 $AddButtom.width                       = 85
 $AddButtom.height                      = 30
 $AddButtom.Anchor                      = 'bottom,left'
-$AddButtom.location                    = New-Object System.Drawing.Point(20,355)
+$AddButtom.location                    = New-Object System.Drawing.Point(20,350)
 $AddButtom.Font                        = 'Microsoft Sans Serif,10'
 
 
-<#
+
 $WhoisBan                      = New-Object system.Windows.Forms.Button
 $WhoisBan.text                 = "Whois Ban"
 $WhoisBan.width                = 85
 $WhoisBan.height               = 30
-$WhoisBan.location             = New-Object System.Drawing.Point(160,355)
+$WhoisBan.location             = New-Object System.Drawing.Point(160,350)
 $WhoisBan.Font                 = 'Microsoft Sans Serif,10'
-#>
+
 
 
 $Cancel                          = New-Object system.Windows.Forms.Button
@@ -162,7 +162,7 @@ $Cancel.text                     = "Cancel"
 $Cancel.width                    = 85
 $Cancel.height                   = 30
 $Cancel.Anchor                   = 'right,bottom'
-$Cancel.location                 = New-Object System.Drawing.Point(292,356)
+$Cancel.location                 = New-Object System.Drawing.Point(292,350)
 $Cancel.Font                     = 'Microsoft Sans Serif,10'
 $Cancel.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
 
@@ -172,57 +172,61 @@ $SteamURL.text                   = "Enter the Steam adresse Profil :"
 $SteamURL.AutoSize               = $true
 $SteamURL.width                  = 25
 $SteamURL.height                 = 10
-$SteamURL.location               = New-Object System.Drawing.Point(20,20)
+$SteamURL.location               = New-Object System.Drawing.Point(20,15)
 $SteamURL.Font                   = 'Microsoft Sans Serif,10'
 
-<#
-Future box More Info, need to get info and drop in file text witch function
+
+# Future box More Info, need to get info and drop in file text witch function
 
 $infobox                         = New-Object system.Windows.Forms.Label
 $infobox.text                    = "More info : "
 $infobox.AutoSize                = $true
 $infobox.width                   = 25
 $infobox.height                  = 10
-$infobox.location                = New-Object System.Drawing.Point(20,70)
+$infobox.location                = New-Object System.Drawing.Point(20,65)
 $infobox.Font                    = 'Microsoft Sans Serif,10'
 
 $TextBox1                        = New-Object system.Windows.Forms.TextBox
 $TextBox1.multiline              = $false
 $TextBox1.width                  = 357
 $TextBox1.height                 = 20
-$TextBox1.location               = New-Object System.Drawing.Point(20,90)
+$TextBox1.location               = New-Object System.Drawing.Point(20,85)
 $TextBox1.Font                   = 'Microsoft Sans Serif,160'
 
-$Form.controls.AddRange(@($infobox,$TextBox1,$WhoisBan))
+$Form                            = New-Object system.Windows.Forms.Form
+$Form.ClientSize                 = '400,400'
+$Form.text                       = "Form"
+$Form.TopMost                    = $false
+
+$CpyRgt                          = New-Object system.Windows.Forms.Label
+$CpyRgt.text                     = "Copyright ©  2020 Kratzi"
+$CpyRgt.AutoSize                 = $true
+$CpyRgt.width                    = 25
+$CpyRgt.height                   = 10
+$CpyRgt.location                 = New-Object System.Drawing.Point(282,384)
+$CpyRgt.Font                     = 'Microsoft Sans Serif,7'
 
 
-#>
 
-
-
-$Form.controls.AddRange(@($URL,$AddButtom,$Cancel,$SteamURL))
+$Form.controls.AddRange(@($URL,$AddButtom,$Cancel,$SteamURL,$CpyRgt,$infobox,$TextBox1,$WhoisBan))
 $form.AcceptButton = $AddButtom
 
 $AddButtom.add_Click({
 
 
 if ((Get-steamID $URL.Text) -eq $null) {
-
 $ButtonType = [System.Windows.MessageBoxButton]::Ok
 $MessageBody = "$Steamid added"
 $MessageTitle = "Added Reported Profil"
 $MessageIcon = [System.Windows.MessageBoxImage]::Warning
 [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
-
 }
 else{
-    
 $ButtonType = [System.Windows.MessageBoxButton]::Ok
 $MessageBody = "$Steamid added"
 $MessageTitle = "Added Reported Profil"
 $MessageIcon = [System.Windows.MessageBoxImage]::Information
 [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
-
 }})
 
 
