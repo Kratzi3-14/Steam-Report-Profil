@@ -63,7 +63,7 @@ I working on :
       - Found a way to replace "break" command (it return me a error when i want to get a PopUp
       - Found a way to detecte the element like steamID and appropriate informations to this SteamID
       
-  # Furture Function :
+  ### Furture Function :
       - Incremente function : (Get +1 at the Reporte to $Reportcount)
          
                 o	if($z -igt 0){ # if steamid already in the file
