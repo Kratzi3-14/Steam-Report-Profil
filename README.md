@@ -33,7 +33,7 @@ source URL profil : https://steamcommunity.com/profiles/76561198080727162
 
 * pre-requisites : You might need admin privilidges and set your ExecutionPolicy to "Remotesigned" or "Bypass" on the machine where you are executing
 
-### How It works ?
+# How It works ?
 
 1. Open the `ProfilReport.ps1` file with a text editor or Windows PowerShell ISE
 
@@ -57,7 +57,7 @@ Powershell.exe -executionpolicy remotesigned -File  PathOfFile\ProfilReport.ps1
                 
 I working on : 
 
-  # Future optimization :
+  ### Future optimization :
       -	Found a way to display the write-host of the function in PopUp with .bat file / or get a alternative to run script
       - Found a way to run the script and hide or close the cmd console
       - Found a way to replace "break" command (it return me a error when i want to get a PopUp
