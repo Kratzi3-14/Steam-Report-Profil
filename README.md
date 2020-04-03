@@ -58,7 +58,7 @@ Powershell.exe -executionpolicy remotesigned -File  PathOfFile\ProfilReport.ps1
 I working on : 
 
   ### Future optimization :
-      -	Found a way to display the write-host of the function in PopUp with .bat file / or get a alternative to run script
+      -	Found a way to display a PopUp with .bat file / or get a alternative to run script
       - Found a way to run the script and hide or close the cmd console
       - Found a way to replace "break" command (it return me a error when i want to get a PopUp
       - Found a way to detecte the element like steamID and appropriate informations to this SteamID
