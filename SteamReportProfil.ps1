@@ -48,17 +48,17 @@
          
 
                 o	if($z -igt 0){ # if steamid already in the file
-                        	Go in file, Found SteamID
-                        	Recognize  $ReportCount Get +1
-                        	$Msg1 = "This Steam ID : $steamid is already reported, Reported count : $ReportCount"
-                        	Write-Host $Msg1
+                        #	Go in file, Found SteamID
+                        #	Recognize  $ReportCount Get +1
+                        #	$Msg1 = "This Steam ID : $steamid is already reported, Reported count : $ReportCount"
+                        #	Write-Host $Msg1
                             
                             break
                                   } 
 
       -	WhoisBan function : (Refresh the file to set the actualy info user and give you who is recently banned)
                         o	If WhoisBan button Get click :
-                            	Function WhoisBan
+                            #	Function WhoisBan
                                 •	Go to file
                                 •	Get Steamid
                                 •	Foreach Steamid and info user
@@ -66,15 +66,15 @@
                                     o	Compare result to the content
                                     o	if $result different  so increment  value $bancount +1
                                     o	If different remplace  replace content with the result
-                            	PopUp  
+                            #	PopUp  
                                 •	If $bancount >= 1  display " $bancount new bans"
                                 •	If  null so « No ban »
-                            	Ok button
+                            #	Ok button
         - More Info : (dialog box where the description of the profile you have reported)
                         o   If Add bouton get click
-                             Get text of dialog box
-                             Recognize "Description" line
-                             Put description
+                            # Get text of dialog box
+                            # Recognize "Description" line
+                            # Put description
 
     #>
 
@@ -101,10 +101,10 @@ function Get-steamID {
     Process
     {
         # File to output the info user profil you reported
-        $FileProfilReport = "C:\Users\SierraLima\OneDrive\# Perso\# Principal\VIRTUAL\Reported List.txt"
-        # API KEY Steam
-                # Found your API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite) 
-        $APISteamKey = "941840D78A3B400C3198386DAC150823"
+        $FileProfilReport = "Path\Reported List.txt"
+        # Steam Web API Key
+                # Found your Steam Web API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite) 
+        $APISteamKey = "Steam Web API Key"
         # Replace 
         $searchURL = $url.Replace(' ','%20')
         # Get the source code of the website
