@@ -1,16 +1,99 @@
 # Steam-Report-Profil
-  Script en Powershell avec interface graphique permettant d'établir un fichier texte avec les profils steam que vous signalez.
+ Powershell script using API Steam to set info user in a file (collected the people you reported)
 
-Le script va, à partir de l'alias du profil, retrouver l'URL source du profil pour l'inscrire dans un fichier texte avec tout plein d'autre information utilisateur.
+The script going to change the alias profil to the source URL profil :
 
-Exemple : Alias : https://steamcommunity.com/id/TB7C/
+Exemple : Alias profil : https://steamcommunity.com/id/TB7C/
 
-devient ==>
+become ==>
 
-URL source : https://steamcommunity.com/id/76561198080727162
+source URL profil : https://steamcommunity.com/profiles/76561198080727162
 
-Je travail sur d'autre fonctionnalité en cours, comme actualisé le fichier texte en retrouvant ceux qui ont été banni.
+    .EXAMPLE
+       - Get-steamid https://steamcommunity.com/id/TB7C/
 
-Avec un peu plus de développement on pourra établir un fichier commun pour voir si cette personne a déjà été bcp signalé ou non.
+       - Return :
+                ----------------------------------------------------------------------
+                Report Date : 3-4-20 08:02
+                Profil : https://steamcommunity.com/profiles/76561198080727162
+                Level : 17
+                Your report number : 1
 
-Si vous avez des propositions pour améliorer le script ou pour faire un autre script ou si vous pensez que ce script serait plus adapté à un autre langage, envoyer moi un message.
+
+                CommunityBanned  : False
+                VACBanned        : False
+                NumberOfVACBans  : 0
+                DaysSinceLastBan : 0
+                NumberOfGameBans : 0
+                EconomyBan       : none
+
+                steamid     : 76561198080727162
+                personaname : Kratzi ✔
+                
+
+* pre-requisites : You might need admin privilidges and set your ExecutionPolicy to "Remotesigned" or "Bypass" on the machine where you are executing
+
+### How It works ?
+
+1. Open the `ProfilReport.ps1` file with a text editor or Windows PowerShell ISE
+
+2. Replace this values to yours
+
+```powershell
+        $FileProfilReport = "Path\Reported List.txt"
+        # Steam Web API Key
+                # Found your Steam Web API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite) 
+        $APISteamKey = "Steam Web API Key"
+```
+
+3. Open the `Steam Report Profil.bat` file with a text editor and replace the path
+
+```batch
+@echo off
+Powershell.exe -executionpolicy remotesigned -File  PathOfFile\ProfilReport.ps1
+```
+
+4. Run the bat file, put the Steam Profil and click on Add button
+                
+I working on : 
+
+  # Future optimization :
+      -	Found a way to display the write-host of the function in PopUp with .bat file / or get a alternative to run script
+      - Found a way to run the script and hide or close the cmd console
+      - Found a way to replace "break" command (it return me a error when i want to get a PopUp
+      - Found a way to detecte the element like steamID and appropriate informations to this SteamID
+      
+  # Furture Function :
+      - Incremente function : (Get +1 at the Reporte to $Reportcount)
+         
+                o	if($z -igt 0){ # if steamid already in the file
+                        #	Go in file, Found SteamID
+                        #	Recognize  $ReportCount Get +1
+                        #	$Msg1 = "This Steam ID : $steamid is already reported, Reported count : $ReportCount"
+                        #	Write-Host $Msg1
+                            
+                            break
+                                  } 
+      -	WhoisBan function : (Refresh the file to set the actualy info user and give you who is recently banned)
+                        o	If WhoisBan button Get click :
+                            #	Function WhoisBan
+                                •	Go to file
+                                •	Get Steamid
+                                •	Foreach Steamid and info user
+                                    o	Go API 
+                                    o	Compare result to the content
+                                    o	if $result different  so increment  value $bancount +1
+                                    o	If different remplace  replace content with the result
+                            #	PopUp  
+                                •	If $bancount >= 1  display " $bancount new bans"
+                                •	If  null so « No ban »
+                            #	Ok button
+        - More Info : (dialog box where the description of the profile you have reported)
+                        o   If Add bouton get click
+                            # Get text of dialog box
+                            # Recognize "Description" line
+                            # Put description
+                            
+May be for the future we can use a commun file to get a big data of people we report. (i know we have website like : https://extremereportbot.com/report/ , but we need some function like description, found your old report etc...)
+
+If you can help me or giving some tricks, or if you think i use the wrong language, please let a comment.
