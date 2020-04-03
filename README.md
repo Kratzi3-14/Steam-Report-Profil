@@ -9,7 +9,7 @@ become ==>
 
 source URL profil : https://steamcommunity.com/profiles/76561198080727162
 
-    .EXAMPLE
+# EXAMPLE
        - Get-steamid https://steamcommunity.com/id/TB7C/
 
        - Return :
@@ -30,7 +30,24 @@ source URL profil : https://steamcommunity.com/profiles/76561198080727162
                 steamid     : 76561198080727162
                 personaname : Kratzi ✔
                 
+#
 
+https://ibb.co/w0fBZNW
+
+<a href="https://ibb.co/w0fBZNW"><img src="https://i.ibb.co/w0fBZNW/Main1.png" alt="Main1" border="0"></a>
+
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/p0Sb6vz/Main1.png" alt="Main1" border="0"></a>
+
+
+[url=https://imgbb.com/][img]https://i.ibb.co/p0Sb6vz/Main1.png[/img][/url]
+
+
+[url=https://ibb.co/w0fBZNW][img]https://i.ibb.co/w0fBZNW/Main1.png[/img][/url]
+
+
+https://ibb.co/6mhrvVX
+
+#
 * pre-requisites : You might need admin privilidges and set your ExecutionPolicy to "Remotesigned" or "Bypass" on the machine where you are executing
 
 # How It works ?
