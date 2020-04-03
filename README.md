@@ -71,9 +71,7 @@ I working on :
                         #	Recognize  $ReportCount Get +1
                         #	$Msg1 = "This Steam ID : $steamid is already reported, Reported count : $ReportCount"
                         #	Write-Host $Msg1
-                            
-                            break
-                                  } 
+                        Break
       -	WhoisBan function : (Refresh the file to set the actualy info user and give you who is recently banned)
                         o	If WhoisBan button Get click :
                             #	Function WhoisBan
