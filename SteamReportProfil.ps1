@@ -1,29 +1,82 @@
 <#
-.Synopsis
-   cript pour obtenir URL Steam et le stock
-.DESCRIPTION
-   Change a alias profil to the source URL profil and save in file with important information user.
-   Version : 1.2
-   Created by Kratzi 
-   Email: none
-   Web: none
-.EXAMPLE
-   Get-steamid 
+    .Synopsis
+       Script for put steam profil reported in a file
+    .DESCRIPTION
+       - Change the alias of URL to source URL profil
+       - Get info user
+       - Put in a file
+    .EXAMPLE
+       - Get-steamid https://steamcommunity.com/id/TB7C/
+
+       - Return :
+                ----------------------------------------------------------------------
+                Report Date : 3-4-20 08:02
+                Profil : https://steamcommunity.com/profiles/76561198080727162
+                Level : 17
+                Your report number : 1
+
+
+                CommunityBanned  : False
+                VACBanned        : False
+                NumberOfVACBans  : 0
+                DaysSinceLastBan : 0
+                NumberOfGameBans : 0
+                EconomyBan       : none
+
+                steamid     : 76561198080727162
+                personaname : Kratzi ✔
+
+    .LINK
+       https://github.com/Kratzi3-14/Steam-Report-Profil
+    .NOTES
+      Version:        1.0
+      Author:         Kratzi
+      Creation Date:  04/03/2020 "April 3 2020"
 #>
-<#
-  All in SteamReported :
-         - Banned : (if is ban)
-                - Reported Name
-                - Actualy Name
-                - URL : http://steamcommunity.com/profiles/$result
-                - Ban time : 
-                - Report Date : 
-         - Waiting Ban : (if is not ban)
-                - Reported Name
-                - Actualy Name
-                - URL : http://steamcommunity.com/profiles/$result
-                - Report Date :
-#>
+    <#
+  # Future project :
+
+      -	Found a way to display the write-host of the function in PopUp with .bat file / or get a alternative to run script
+      - Found a way to run the script and hide or close the cmd console
+      - Found a way to replace "break" command (it return me a error when i want to get a PopUp
+      - Found a way to detecte the element like steamID and appropriate informations to this SteamID
+      
+
+  # Furture Function :
+
+      - Incremente function : (Get +1 at the Reporte to $Reportcount)
+         
+
+                o	if($z -igt 0){ # if steamid already in the file
+                        	Go in file, Found SteamID
+                        	Recognize  $ReportCount Get +1
+                        	$Msg1 = "This Steam ID : $steamid is already reported, Reported count : $ReportCount"
+                        	Write-Host $Msg1
+                            
+                            break
+                                  } 
+
+      -	WhoisBan function : (Refresh the file to set the actualy info user and give you who is recently banned)
+                        o	If WhoisBan button Get click :
+                            	Function WhoisBan
+                                •	Go to file
+                                •	Get Steamid
+                                •	Foreach Steamid and info user
+                                    o	Go API 
+                                    o	Compare result to the content
+                                    o	if $result different  so increment  value $bancount +1
+                                    o	If different remplace  replace content with the result
+                            	PopUp  
+                                •	If $bancount >= 1  display " $bancount new bans"
+                                •	If  null so « No ban »
+                            	Ok button
+        - More Info : (dialog box where the description of the profile you have reported)
+                        o   If Add bouton get click
+                             Get text of dialog box
+                             Recognize "Description" line
+                             Put description
+
+    #>
 
 
 
@@ -47,42 +100,43 @@ function Get-steamID {
  
     Process
     {
-        # Fichier dans lequel sera répertorier toute les URL signalé
-        $FileProfilReport = "Path\Reported List.txt"
-        # Clé API Steam permettant d'avoir accès au information
-        $APISteamKey = "Your API Steam KEY" #Found your API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite)
-        # Remplace 
+        # File to output the info user profil you reported
+        $FileProfilReport = "C:\Users\SierraLima\OneDrive\# Perso\# Principal\VIRTUAL\Reported List.txt"
+        # API KEY Steam
+                # Found your API Key in this link : https://steamcommunity.com/dev/apikey (you need to be already login  in steamwebsite) 
+        $APISteamKey = "941840D78A3B400C3198386DAC150823"
+        # Replace 
         $searchURL = $url.Replace(' ','%20')
-        # Récupère le code source de la page
+        # Get the source code of the website
         $page = Invoke-WebRequest -UseBasicParsing  $searchURL
 
-        # Partern de recherche
+        # Search Pattern
         $pattern_steamdid = '","steamid":"(.*?)","personaname":"'
         $pattern_lvlprofil = '"><span class="friendPlayerLevelNum">(.*?)</span>'
         
 
-        # Récupération des informations sur la page
+        # Get info
         $steamid = [regex]::match($page, $pattern_steamdid).Groups[1].Value
         $lvlprofil = [regex]::match($page, $pattern_lvlprofil).Groups[1].Value
 
-        # Condition si la récupération ne conclu pas
+        # If you not get info
         if(!($steamid)){
             
-            $urlwrong = "Url invalide"
+            $urlwrong = "WRONG URL"
             Write-Warning $urlwrong
             break
         }
         if(!($lvlprofil)){
             
-            $lvlprofil = $nolvlprofil = "L'utilisateur ne possède pas de LvL profil"
+            $lvlprofil = $nolvlprofil = "The user dont have a profil Level"
         }
 
         
-        # Compte combien de fois le SteamID est présent sur le fichier (pour éviter les doublons)
+        # Count the steamid in the file (to make sur you havnt duplicates) 
         $z= (Get-Content -path $FileProfilReport | Where-Object { $_.Contains($steamid) }).Count
 
 
-        # Condition si le steamid est déjà présent au moins une fois
+        # If the steam id is present
         if($z -igt 0){
 
         #$ReportCount +1
@@ -95,25 +149,26 @@ function Get-steamID {
         
         }
 
-        # Condition si le steamid n'est pas présent
+        # If the steam id is not
         if($z -eq 0){
 
 
         $ReportCount = 1
 
+        # Careful date is "Day Month Year"
         $DateReport = (get-date).ToString('d-M-y hh:mm')
         
-        # Mise en place du steam id sur l'URL pour posséder l'URL d'origine
+        # Set up the steamid in this URL for get the real link profile
         $SourceURL = "https://steamcommunity.com/profiles/$steamid"
         
-        # Utilisation des API pour récupérer les données web
+        # Use the API to get info user
         $InfoPlayer = (Invoke-RestMethod -Method Get -URI ("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$APISteamKey&steamids="+$steamid)).response.players | Select-Object steamid,personaname
         $BanPlayer = (Invoke-RestMethod -Method Get -URI ("https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key=$APISteamKey&steamids="+$steamid)).players | Select-Object communitybanned,vacbanned,numberofvacbans,dayssincelastban,numberofgamebans,economyban
 
-        # Sortie en texte sur le fichier
+        # Output in your file text
         add-Content -path $FileProfilReport -value ""
         add-Content -path $FileProfilReport -value ('-'*70)
-        add-Content -path $FileProfilReport -value "Date Report : $DateReport`nProfil : $SourceURL`nLevel : $lvlprofil`nNombre de Report : $ReportCount"
+        add-Content -path $FileProfilReport -value "Report Date : $DateReport`nProfil : $SourceURL`nLevel : $lvlprofil`nYour report number : $ReportCount"
         (($BanPlayer,$InfoPlayer) | Out-String) | Out-File -FilePath $FileProfilReport -Append
 
         Write-Host "This Steam ID : $steamid is added in the file"
@@ -138,24 +193,25 @@ $URL.height                      = 20
 $URL.location                    = New-Object System.Drawing.Point(20,34)
 $URL.Font                        = 'Microsoft Sans Serif,10'
 
-$AddButtom                             = New-Object system.Windows.Forms.Button
-$AddButtom.text                        = "Add"
-$AddButtom.width                       = 85
-$AddButtom.height                      = 30
-$AddButtom.Anchor                      = 'bottom,left'
-$AddButtom.location                    = New-Object System.Drawing.Point(20,350)
-$AddButtom.Font                        = 'Microsoft Sans Serif,10'
+$AddButtom                       = New-Object system.Windows.Forms.Button
+$AddButtom.text                  = "Add"
+$AddButtom.width                 = 85
+$AddButtom.height                = 30
+$AddButtom.Anchor                = 'bottom,left'
+$AddButtom.location              = New-Object System.Drawing.Point(20,350)
+$AddButtom.Font                  = 'Microsoft Sans Serif,10'
 
 
+<#
 
-$WhoisBan                      = New-Object system.Windows.Forms.Button
-$WhoisBan.text                 = "Whois Ban"
-$WhoisBan.width                = 85
-$WhoisBan.height               = 30
-$WhoisBan.location             = New-Object System.Drawing.Point(160,350)
-$WhoisBan.Font                 = 'Microsoft Sans Serif,10'
+$WhoisBan                        = New-Object system.Windows.Forms.Button
+$WhoisBan.text                   = "Whois Ban"
+$WhoisBan.width                  = 85
+$WhoisBan.height                 = 30
+$WhoisBan.location               = New-Object System.Drawing.Point(160,350)
+$WhoisBan.Font                   = 'Microsoft Sans Serif,10'
 
-
+#>
 
 $Cancel                          = New-Object system.Windows.Forms.Button
 $Cancel.text                     = "Cancel"
@@ -178,6 +234,7 @@ $SteamURL.Font                   = 'Microsoft Sans Serif,10'
 
 # Future box More Info, need to get info and drop in file text witch function
 
+<#
 $infobox                         = New-Object system.Windows.Forms.Label
 $infobox.text                    = "More info : "
 $infobox.AutoSize                = $true
@@ -186,17 +243,15 @@ $infobox.height                  = 10
 $infobox.location                = New-Object System.Drawing.Point(20,65)
 $infobox.Font                    = 'Microsoft Sans Serif,10'
 
+
 $TextBox1                        = New-Object system.Windows.Forms.TextBox
 $TextBox1.multiline              = $false
 $TextBox1.width                  = 357
 $TextBox1.height                 = 20
 $TextBox1.location               = New-Object System.Drawing.Point(20,85)
 $TextBox1.Font                   = 'Microsoft Sans Serif,160'
+#>
 
-$Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = '400,400'
-$Form.text                       = "Form"
-$Form.TopMost                    = $false
 
 $CpyRgt                          = New-Object system.Windows.Forms.Label
 $CpyRgt.text                     = "Copyright ©  2020 Kratzi"
@@ -207,14 +262,21 @@ $CpyRgt.location                 = New-Object System.Drawing.Point(282,384)
 $CpyRgt.Font                     = 'Microsoft Sans Serif,7'
 
 
+# ,$TextBox1,$WhoisBan # The variable ready to put bellow
 
-$Form.controls.AddRange(@($URL,$AddButtom,$Cancel,$SteamURL,$CpyRgt,$infobox,$TextBox1,$WhoisBan))
+$Form.controls.AddRange(@($URL,$AddButtom,$Cancel,$SteamURL,$CpyRgt,$infobox))
 $form.AcceptButton = $AddButtom
 
-$AddButtom.add_Click({
+$AddButtom.add_Click({Get-steamID $URL.Text})
+
+<# 
+
+    # PopUp ready to use but 
+            - not with .bat
+            - when the function use break i get error (not my error)
 
 
-if ((Get-steamID $URL.Text) -eq $null) {
+if (() -eq $null) {
 $ButtonType = [System.Windows.MessageBoxButton]::Ok
 $MessageBody = "$Steamid added"
 $MessageTitle = "Added Reported Profil"
@@ -227,7 +289,9 @@ $MessageBody = "$Steamid added"
 $MessageTitle = "Added Reported Profil"
 $MessageIcon = [System.Windows.MessageBoxImage]::Information
 [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
-}})
+})
 
+
+#>
 
 $Form.ShowDialog()
