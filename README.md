@@ -34,7 +34,7 @@ source URL profil : https://steamcommunity.com/profiles/76561198080727162
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/p0Sb6vz/Main1.png" alt="Main1" border="0"></a>
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/0cNmB8s/Result2.png" alt="Result2" border="0"></a>
 
-### * Pre-requisites : You might need admin privilidges and set your ExecutionPolicy to "Remotesigned" or "Bypass" on the machine where you are executing
+### * Pre-requisites : You might need admin privilidges and set your ExecutionPolicy to "Remotesigned" or "Bypass" PowerShell script on the machine where you are executing
 
 # How It works ?
 
