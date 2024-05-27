@@ -6,12 +6,12 @@
        - Get info user
        - Put in a file
     .EXAMPLE
-       - Get-steamid https://steamcommunity.com/id/TB7C/
+       - Get-steamid https://steamcommunity.com/id/
 
        - Return :
                 ----------------------------------------------------------------------
                 Report Date : 3-4-20 08:02
-                Profil : https://steamcommunity.com/profiles/76561198080727162
+                Profil : https://steamcommunity.com/profiles/
                 Level : 17
                 Your report number : 1
 
@@ -23,7 +23,7 @@
                 NumberOfGameBans : 0
                 EconomyBan       : none
 
-                steamid     : 76561198080727162
+                steamid     : 
                 personaname : Kratzi ✔
 
     .LINK
