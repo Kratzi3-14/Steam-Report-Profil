@@ -3,11 +3,11 @@
 
 The script going to change the alias profil to the source URL profil :
 
-Exemple : Alias profil : https://steamcommunity.com/id/TB7C/
+Exemple : Alias profil : https://steamcommunity.com/id/AbacusAvenger
 
 become ==>
 
-source URL profil : https://steamcommunity.com/profiles/76561198080727162
+source URL profil : https://steamcommunity.com/profiles/76561197962146232
 
 # EXAMPLE
        - Get-steamid https://steamcommunity.com/id/TB7C/
@@ -15,7 +15,7 @@ source URL profil : https://steamcommunity.com/profiles/76561198080727162
        - Return :
                 ----------------------------------------------------------------------
                 Report Date : 3-4-20 08:02
-                Profil : https://steamcommunity.com/profiles/76561198080727162
+                Profil : https://steamcommunity.com/profiles/76561197962146232
                 Level : 17
                 Your report number : 1
 
@@ -27,7 +27,7 @@ source URL profil : https://steamcommunity.com/profiles/76561198080727162
                 NumberOfGameBans : 0
                 EconomyBan       : none
 
-                steamid     : 76561198080727162
+                steamid     : 76561197962146232
                 personaname : Kratzi ✔
                 
 
